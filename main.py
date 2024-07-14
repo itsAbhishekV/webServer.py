@@ -31,11 +31,22 @@ while True:
     print(first_header_components)
     
     http_method = first_header_components[0]
-    path = first_header_components[1]
-    http_version = first_header_components[2]
+    path = first_header_components[1] 
+    http_version = first_header_components[2] 
 
-    if path == '/':
-        
+    if http_method == 'GET':
+        if path == '/':
+            file_input = open('index.html');
+            content = file_input.read()
+            file_input.close()
+
+            response = 'HTTP/1.1 200 OK\n\n' + content
+            cli_socket.sendall(response.encode())
+            cli_socket.close()
+    else:
+        response = 'HTTP/1.1 405 Method Not Allowed\n\n'
+        cli_socket.sendall(response.encode())
+        cli_socket.close()
 
     
 
