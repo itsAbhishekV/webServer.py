@@ -22,6 +22,25 @@ webS_socket.listen((5))
 
 print(f"Listening on port {WEBS_PORT} :)")
 
+while True:
+    cli_socket, cli_address = webS_socket.accept();
+    req = cli_socket.recv(1024).decode()
+    print(req)
+    headers = req.split('\n')
+    first_header_components = headers[0].split()
+    print(first_header_components)
+    
+    http_method = first_header_components[0]
+    path = first_header_components[1]
+    http_version = first_header_components[2]
+
+    if path == '/':
+        
+
+    
+
+
+
 
 
 
